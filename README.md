@@ -9,7 +9,9 @@ In this project, we are going to look at the [sublikescript](https://subslikescr
 In the data folder:
 
 - `movies_data`: folder where I put the datasets about movies titles, dates and descriptions.
-- `movies_transcript`: folder where I put transcriptions files for each movie in the movies_data datasets.
+- `movies_transcript`: folder where I put transcriptions files for each movie in the movies_data datasets. We'll have a sub folder for each first letter in the title.
+
+Note that we are not going to get all the movies in the website, but for each letter that the movie's title might start with, we'll get the first 2 pages of content.
 
 ## How to use
 
