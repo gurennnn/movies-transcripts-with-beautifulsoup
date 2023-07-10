@@ -28,8 +28,8 @@ for letter_link in letters_links[1:4]:
 
     # create a directory for the current letter if it doesn't exist
     letter = letter_link.split('-')[-1]
-    if os.path.exists(f'../data/movies_transcripts/{letter}') == False:
-        os.mkdir(f'../data/movies_transcripts/{letter}')
+    if os.path.exists(f'./data/movies_transcripts/{letter}') == False:
+        os.mkdir(f'./data/movies_transcripts/{letter}')
 
     # initialize empty lists for storing movie info
     titles = []
@@ -61,6 +61,7 @@ for letter_link in letters_links[1:4]:
             movie_article = movie_soup.find('article', class_='main-article')
             
             movie_title, movie_year = get_title_and_year_from_h1(movie_article.find('h1').text)
+            movie_title = clean_title(movie_title)
 
             print(f'Scraping movie {movie_title}...')
 
@@ -76,15 +77,15 @@ for letter_link in letters_links[1:4]:
             
             # save movie transcript
             movie_transcript = movie_article.find('div', class_='full-script').get_text(strip=True, separator='\n')
-            movie_title = clean_title(movie_title)
-            with open(f'../data/movies_transcripts/{letter}/{movie_title}.txt', 'w') as f:
+            
+            with open(f'./data/movies_transcripts/{letter}/{movie_title}.txt', 'w') as f:
                 f.write(movie_transcript)
 
         print(f'Done scraping page {n_page}.')
 
     # save movie info to csv
     df = pd.DataFrame({'title': titles, 'year': years, 'plot': plots})
-    df.to_csv(f'../data/movies_info/{letter}.csv', index=False)
+    df.to_csv(f'./data/movies_info/{letter}.csv', index=False)
 
     print(f'Done scraping movies for letter {letter}.')
 
